@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html dir="ltr" lan="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tikt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/bulma.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/all.min.css'>
+</head>
+
+<body>
+
+    <div class="sideMenuIcon">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="sideBar active">
+        <div class="top">
+            <p class="menu-label">Club</p>
+            <a href="/admin/" class="lik"><i class="fa-solid fa-gears"></i><span>Settings</span></a>
+            <a href="/admin/members" class="lik active"><i class="fa-solid fa-users"></i><span>Members</span></a>
+            <a href="/admin/comps" class="lik"><i class="fa-solid fa-user-ninja"></i><span>Competitions</span></a>
+            <a href="/admin/courses" class="lik"><i class="fa-solid fa-lines-leaning"></i> <span>Learn</span></a>
+
+            <p class="menu-label">University Events</p>
+            <a href="/admin/event" class="lik"><i class="fa-solid fa-calendar-days"></i> <span>event</span></a>
+        </div>
+        <div class="bottom">
+            <article class="media">
+                <figure class="media-left">
+                    <img src="https://via.placeholder.com/50" alt="Profile Image">
+                </figure>
+                <p>
+                    <span class="fname">FirstName</span>
+                    <span class="uname">UniversityName</span>
+                </p>
+                <div class="media-right">
+                    <span class="icon" id="logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div class="contentBox">
+        <p class="is-size-4 has-text-weight-semibold cus-dark">Add new members</p>
+
+        <div class="field is-grouped">
+            <div class="control is-expanded">
+                <input type="email" class="input is-fullwidth" placeholder="enter his email">
+            </div>
+            <div class="control">
+                <button class="button cus" id="memebrNew"><i class="fa-solid fa-plus"></i> Add member</button>
+            </div>
+            <p class="is-hidden cus has-text-centered" id="no">not found / or in other club</p>
+            <p class="is-hidden cus has-text-centered" id="yes">Added successfully</p>
+        </div>
+
+        <p class="is-size-4 has-text-weight-semibold cus-dark">Club members</p>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>john@example.com</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>jane@example.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
+<script src='/assets/script/main.js'></script>
