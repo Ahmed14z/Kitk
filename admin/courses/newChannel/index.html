@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html dir="ltr" lan="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tikt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/bulma.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/all.min.css'>
+</head>
+
+<body>
+
+    <div class="sideMenuIcon">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="sideBar active">
+        <div class="top">
+            <p class="menu-label">Club</p>
+            <a href="/admin/" class="lik"><i class="fa-solid fa-gears"></i><span>Settings</span></a>
+            <a href="/admin/members" class="lik"><i class="fa-solid fa-users"></i><span>Members</span></a>
+            <a href="/admin/comps" class="lik"><i class="fa-solid fa-user-ninja"></i><span>Competitions</span></a>
+            <a href="/admin/courses" class="lik active"><i class="fa-solid fa-lines-leaning"></i> <span>Learn</span></a>
+
+            <p class="menu-label">University Events</p>
+            <a href="/admin/event" class="lik"><i class="fa-solid fa-calendar-days"></i> <span>event</span></a>
+        </div>
+        <div class="bottom">
+            <article class="media">
+                <figure class="media-left">
+                    <img src="https://via.placeholder.com/50" alt="Profile Image">
+                </figure>
+                <p>
+                    <span class="fname" id="userFirstName">FirstName</span>
+                    <span class="uname">UniversityName</span>
+                </p>
+                <div class="media-right">
+                    <span class="icon" id="logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div class="contentBox">
+        <p class="is-size-4 has-text-weight-semibold cus-dark">Start new Channel</p>
+        <br>
+        <div class="columns is-multiline is-centered">
+            <div class="column is-7">
+                <p class="is-size-6 has-text-weight-semibold cus-dark">Channel Info</p>
+                <form id="newChannel">
+                    <div class="field">
+                        <label class="label cus">Channel Name</label>
+                        <div class="control">
+                            <input class="input" id="name" type="text" placeholder="eg. Learn c++ programming" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label cus">Channel Description</label>
+                        <div class="control">
+                            <input class="input" id="desc" type="text" placeholder="eg. A crash Course in C++" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary cus is-fullwidth">Create channel</button>
+                        </div>
+                    </div>
+                    <p class="is-hidden cus has-text-centered" id="info">Channel Created</p>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+<script src='/assets/script/main.js'></script>
+
+<script>
+let info = document.getElementById("info");
+
+document.addEventListener('DOMContentLoaded', function () {
+    let newChannel = document.getElementById("newChannel");
+    newChannel.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const title = newChannel.querySelector('#name').value;
+        const description = newChannel.querySelector('#desc').value;
+        const formData = {
+            title,
+            description,
+        };
+
+        try {
+            const response = await fetch('http://localhost:8001/create_channel', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                info.classList.remove('is-hidden');
+            } else {
+                console.error('Request failed:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Request error:', error);
+        }
+    });
+
+});
+
+</script>

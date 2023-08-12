@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html dir="ltr" lan="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tikt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/bulma.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/all.min.css'>
+</head>
+
+<body>
+
+    <div class="sideMenuIcon">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="sideBar active">
+        <div class="top">
+            <a href="/student/" class="lik"><i class="fa-solid fa-house"></i> <span>Home</span></a>
+
+            <p class="menu-label">Club</p>
+            <a href="/student/comps" class="lik"><i class="fa-solid fa-user-ninja"></i><span>Competitions</span></a>
+            <a href="/student/courses" class="lik active"><i class="fa-solid fa-lines-leaning"></i>
+                <span>Learn</span></a>
+
+            <p class="menu-label">University Events</p>
+            <a href="/student/event" class="lik special">
+                <img src="/assets/imgs/hackathon.png" alt="">
+            </a>
+        </div>
+        <div class="bottom">
+            <article class="media">
+                <figure class="media-left">
+                    <img src="https://via.placeholder.com/50" alt="Profile Image">
+                </figure>
+                <p>
+                    <span class="fname" id="userFirstName">FirstName</span>
+                    <span class="uname">UniversityName</span>
+                </p>
+                <div class="media-right">
+                    <span class="icon" id="logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <nav class="navbar fixed" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#">
+                <img src="/assets/imgs/logo.png" alt="Logo">
+            </a>
+            <div class="navbar-item">
+                <p class="is-size-6 has-text-weight-semibold cus-darker"><a href="/student/" class="cus-light">Home</a>
+                    > Learn</p>
+            </div>
+        </div>
+    </nav>
+
+    <div class="contentBox">
+        <p class="is-size-5 has-text-weight-semibold cus-dark">Channels | Subjects</p>
+        <!-- <p class="is-size-6 has-text-weight-semibold cus-light">Followed Channels</p> -->
+        <div class="columns is-multiline" id="channelCont">
+            
+        </div>
+        <!-- <p class="is-size-6 has-text-weight-semibold cus-light">All Channels</p>
+        <div class="columns is-multiline">
+            <div class="column is-3 joinedChan" channelId="624872">
+                <div class="cont">
+                    <img src="/assets/imgs/android.png" alt="">
+                    <h2 class="cus-dark is-size-4 has-text-weight-semibold">Android development Course</h2>
+                    <p class="dec cus-darker">News, articles, roadmaps and courses for Andrid development</p>
+                    <button view="624872" class="button viewIt">view <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+</body>
+
+</html>
+<script src='/assets/script/main.js'></script>
+
+<script>
+
+    let channelCont = document.getElementById("channelCont");
+    document.addEventListener('DOMContentLoaded', async()=> {
+        const response = await fetch('http://localhost:8001/get_channels', {
+            method: 'GET',
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            data.channels.forEach((chan) => {
+                channelCont.innerHTML += 
+                `
+                <div class="column is-4 joinedChan">
+                    <div class="cont">
+                        <h2 class="cus-dark is-size-4 has-text-weight-semibold">${chan.title}</h2>
+                        <p class="dec cus-darker">${chan.description}</p>
+                        <a href="${chan.link}" class="button viewIt">view <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                `
+            });
+        } else {
+            console.error('Request failed:', response.status, response.statusText);
+        }
+    })
+
+</script>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html dir="ltr" lan="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tikt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/bulma.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/all.min.css'>
+</head>
+
+<body>
+
+    <div class="sideMenuIcon">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="sideBar active">
+        <div class="top">
+            <a href="/student/" class="lik"><i class="fa-solid fa-house"></i> <span>Home</span></a>
+
+            <p class="menu-label">Club</p>
+            <a href="/student/comps" class="lik"><i class="fa-solid fa-user-ninja"></i><span>Competitions</span></a>
+            <a href="/student/courses" class="lik active"><i class="fa-solid fa-lines-leaning"></i>
+                <span>Learn</span></a>
+
+            <p class="menu-label">University Events</p>
+            <a href="/student/event" class="lik special">
+                <img src="/assets/imgs/hackathon.png" alt="">
+            </a>
+        </div>
+        <div class="bottom">
+            <article class="media">
+                <figure class="media-left">
+                    <img src="https://via.placeholder.com/50" alt="Profile Image">
+                </figure>
+                <p>
+                    <span class="fname">FirstName</span>
+                    <span class="uname">UniversityName</span>
+                </p>
+                <div class="media-right">
+                    <span class="icon" id="logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <nav class="navbar fixed" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#">
+                <img src="/assets/imgs/logo.png" alt="Logo">
+            </a>
+            <div class="navbar-item">
+                <p class="is-size-6 has-text-weight-semibold cus-darker"><a href="/student/" class="cus-light">Home</a>
+                    > Learn</p>
+            </div>
+        </div>
+    </nav>
+
+    <div class="contentBox">
+        <div class="tabs">
+            <button class="tab-button" id="tab1">Course Info</button>
+            <button class="tab-button" id="tab2">Tutorial</button>
+            <button class="tab-button" id="tab3">Roadmaps</button>
+        </div>
+
+        <div class="tab-content" id="content1">
+            <h1 class="is-size-3 has-text-weight-semibold cus-dark" id="cName"></h1>
+            <p class="is-size-4 has-text-weight-normal cus-light" id="cDesc"></p>
+        </div>
+        <div class="tab-content" id="content2">
+            <div class="columns">
+                <div class="box column is-12">
+                    <h2 class="is-size-4 has-text-weight-semibold cus-dark">xxxx</h2>
+                    <p class="is-size-5 has-text-weight-normal cus-dark">yyyy</p>
+                    <div class="article custom is-hidden">
+                        zzzz
+                    </div>
+                    <button onclick="this.previousElementSibling.classList.remove('is-hidden')"></button>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content" id="content3">
+
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>
+<script src='/assets/script/main.js'></script>
+
+<script>
+
+    let channelCont = document.getElementById("channelCont");
+    let cName = document.getElementById("cName");
+    let cDesc = document.getElementById("cDesc");
+
+    let content2 = document.getElementById("content2");
+    let content3 = document.getElementById("content3");
+    document.addEventListener('DOMContentLoaded', async () => {
+        const response = await fetch('http://localhost:8001/get_channel_data/1', {
+            method: 'GET',
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            cName.textContent = data.title;
+            cDesc.textContent = data.description;
+
+            data.tutorials.forEach((ele)=>{
+                const boxElement = document.createElement("div");
+                boxElement.classList.add("box", "column", "is-12");
+
+                // Create the <h2> element
+                const headingElement = document.createElement("h2");
+                headingElement.classList.add("is-size-4", "has-text-weight-semibold", "cus-dark");
+                headingElement.textContent = ele.title;
+
+                // Create the <p> element
+                const paragraphElement = document.createElement("p");
+                paragraphElement.classList.add("is-size-5", "has-text-weight-normal", "cus-dark");
+                paragraphElement.textContent = ele.description;
+
+                // Create the <div class="article"> element
+                const articleElement = document.createElement("div");
+                articleElement.classList.add("article", "custom", "is-hidden");
+                articleElement.textContent = ele.content;
+
+                // Create the <button> element
+                const buttonElement = document.createElement("button");
+                buttonElement.classList.add("button", "cus");
+                buttonElement.textContent = "Show Article";
+                buttonElement.addEventListener("click", function () {
+                    articleElement.classList.toggle("is-hidden");
+                });
+
+
+                boxElement.appendChild(headingElement);
+                boxElement.appendChild(paragraphElement);
+                boxElement.appendChild(articleElement);
+                boxElement.appendChild(buttonElement);
+
+                content2.appendChild(boxElement);
+            })
+
+            data.roadmaps.forEach((ele)=>{
+                const boxElement = document.createElement("div");
+                boxElement.classList.add("box", "column", "is-12");
+
+                // Create the <h2> element
+                const headingElement = document.createElement("h2");
+                headingElement.classList.add("is-size-4", "has-text-weight-semibold", "cus-dark");
+                headingElement.textContent = ele.title;
+
+                // Create the <p> element
+                const paragraphElement = document.createElement("p");
+                paragraphElement.classList.add("is-size-5", "has-text-weight-normal", "cus-dark");
+                paragraphElement.textContent = ele.description;
+
+                // Create the <div class="article"> element
+                const articleElement = document.createElement("div");
+                articleElement.classList.add("article", "custom", "is-hidden");
+                articleElement.textContent = ele.content;
+
+                // Create the <button> element
+                const buttonElement = document.createElement("button");
+                buttonElement.classList.add("button", "cus");
+                buttonElement.textContent = "Show Article";
+                buttonElement.addEventListener("click", function () {
+                    articleElement.classList.toggle("is-hidden");
+                });
+
+
+                boxElement.appendChild(headingElement);
+                boxElement.appendChild(paragraphElement);
+                boxElement.appendChild(articleElement);
+                boxElement.appendChild(buttonElement);
+
+                content2.appendChild(boxElement);
+            })
+           
+
+        } else {
+            console.error('Request failed:', response.status, response.statusText);
+        }
+    })
+
+</script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const tabContents = document.querySelectorAll(".tab-content");
+
+        tabButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                tabButtons.forEach((btn) => btn.classList.remove("active"));
+                button.classList.add("active");
+
+                const targetContentId = button.id.replace("tab", "content");
+                tabContents.forEach((content) => {
+                    content.style.display = "none";
+                });
+                document.getElementById(targetContentId).style.display = "block";
+            });
+        });
+
+        // Activate the first tab by default
+        tabButtons[0].click();
+    });
+
+</script>
