@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html dir="ltr" lan="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tikt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/bulma.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/all.min.css'>
+</head>
+
+<body>
+
+    <div class="sideMenuIcon">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="sideBar active">
+        <div class="top">
+            <p class="menu-label">Club</p>
+            <a href="/admin/" class="lik"><i class="fa-solid fa-gears"></i><span>Settings</span></a>
+            <a href="/admin/members" class="lik"><i class="fa-solid fa-users"></i><span>Members</span></a>
+            <a href="/admin/comps" class="lik"><i class="fa-solid fa-user-ninja"></i><span>Competitions</span></a>
+            <a href="/admin/courses" class="lik active"><i class="fa-solid fa-lines-leaning"></i> <span>Learn</span></a>
+
+            <p class="menu-label">University Events</p>
+            <a href="/admin/event" class="lik"><i class="fa-solid fa-calendar-days"></i> <span>event</span></a>
+        </div>
+        <div class="bottom">
+            <article class="media">
+                <figure class="media-left">
+                    <img src="https://via.placeholder.com/50" alt="Profile Image">
+                </figure>
+                <p>
+                    <span class="fname">FirstName</span>
+                    <span class="uname">UniversityName</span>
+                </p>
+                <div class="media-right">
+                    <span class="icon" id="logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div class="contentBox">
+        <p class="is-size-4 has-text-weight-semibold cus-dark">Generate a tutorial</p>
+        <br>
+        <div class="columns is-multiline is-centered">
+            <div class="column is-7">
+                <p class="is-size-6 has-text-weight-semibold cus-dark">Tutorial Specification</p>
+                <form id="generate">
+                    <div class="field">
+                        <label class="label cus">Tutorial Topic</label>
+                        <div class="control">
+                            <input class="input" id="topic" type="text" placeholder="eg. c++ programming" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label cus">What to explain</label>
+                        <div class="control">
+                            <input class="input" id="lesson" type="text" placeholder="eg. pointers in c++" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label cus">Exaplin Level</label>
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select id="level" required>
+                                    <option value="Very simple">Very simple</option>
+                                    <option value="Simple">Simple</option>
+                                    <option value="Advanced">Advanced</option>
+                                    <option value="Very advanced">Very advanced</option>
+                                    <option value="Deep Dive">Deep dive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label cus">Add resources?</label>
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select id="source" required>
+                                    <option value="Add resources">Yes Add resources</option>
+                                    <option value="don't Add resources">No don't Add resources</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary cus is-fullwidth">Generate</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="column is-5 is-hidden" id="publishBox">
+                <form id="publish">
+                    <p class="is-size-6 has-text-weight-semibold cus-dark">Publish settings</p>
+                    <div class="field">
+                        <label class="label cus">Tutorial Title</label>
+                        <div class="control">
+                            <input class="input" type="text" id="title" placeholder="eg. 20 days web development roadmap" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Tutorial Description</label>
+                        <div class="control">
+                            <input class="input" type="text" id="desc" placeholder="eg. this roadmap is for who want to learn web" required>
+                        </div>
+                    </div>
+                      
+
+                    <div class="field">
+                        <label class="label cus">Channel to publish in</label>
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select id="channel" required>
+                                    <option value="ch1">Channel 1 Name</option>
+                                    <option value="ch2">Channel 2 Name</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-primary cus is-fullwidth">Publish</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="column is-7 is-hidden" id="outputBox">
+                <p class="is-size-6 has-text-weight-semibold cus-dark">AI Generated Tutorial:</p>
+                <div class="field">
+                    <label class="label">Output (editable)</label>
+                    <div class="control">
+                        <textarea class="textarea aioutput" id="aioutput" placeholder="Enter your text here" required></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+<script src='/assets/script/main.js'></script>
+
+<script>
+
+let aioutput = document.getElementById("aioutput");
+let publishBox = document.getElementById("publishBox");
+let outputBox = document.getElementById("outputBox");
+
+document.addEventListener('DOMContentLoaded', function () {
+    let generateForm = document.getElementById("generate");
+    generateForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const topic = generateForm.querySelector('#topic').value;
+        const lesson = generateForm.querySelector('#lesson').value;
+        const level = generateForm.querySelector('#level').value;
+        const source = generateForm.querySelector('#source').value;
+        let command = `In ${topic}, I want you to explain to me ${lesson}, In ${level} way. Note: ${source}`
+        const formData = {
+            topic,
+            lesson,
+            level,
+            source,
+            command
+        };
+
+        try {
+            const response = await fetch('http://localhost:5000/generateTutorial', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                aioutput.value = data.choices[0].message.content;
+
+                outputBox.classList.remove('is-hidden');
+                publishBox.classList.remove('is-hidden');
+            } else {
+                console.error('Request failed:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Request error:', error);
+        }
+    });
+
+
+    let publishForm = document.getElementById("publish");
+    publishForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const title = generateForm.querySelector('#title').value;
+        const desc = generateForm.querySelector('#desc').value;
+        const channel = generateForm.querySelector('#channel').value;
+
+        const formData = {
+            title,
+            desc,
+            channel
+        };
+
+        try {
+            const response = await fetch('http://localhost:5000/publishTutorial', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+        } catch (error) {
+            console.error('Request error:', error);
+        }
+    });
+});
+
+</script>

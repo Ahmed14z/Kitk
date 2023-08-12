@@ -388,3 +388,8 @@ hr {
     margin-top: 10px;
     font-weight: 600;
   }
+
+
+.aioutput{
+    white-space: pre-wrap;
+}
