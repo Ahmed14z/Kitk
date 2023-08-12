@@ -153,6 +153,8 @@ let outputBox = document.getElementById("outputBox");
 document.addEventListener('DOMContentLoaded', function () {
     let generateForm = document.getElementById("generate");
     generateForm.addEventListener('submit', async function (event) {
+        outputBox.classList.remove('is-hidden');
+
         event.preventDefault();
 
         const topic = generateForm.querySelector('#topic').value;
@@ -168,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/generateRoadmap', {
+            const response = await fetch('http://localhost:5000/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -180,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = await response.json();
                 aioutput.value = data.choices[0].message.content;
 
-                outputBox.classList.remove('is-hidden');
                 publishBox.classList.remove('is-hidden');
             } else {
                 console.error('Request failed:', response.status, response.statusText);

@@ -50,24 +50,23 @@
 
         <div class="field is-grouped">
             <div class="control is-expanded">
-                <input type="email" class="input is-fullwidth" placeholder="enter his email">
+                <input type="email" class="input is-fullwidth" id="email" placeholder="enter his email">
             </div>
             <div class="control">
                 <button class="button cus" id="memebrNew"><i class="fa-solid fa-plus"></i> Add member</button>
             </div>
-            <p class="is-hidden cus has-text-centered" id="no">not found / or in other club</p>
-            <p class="is-hidden cus has-text-centered" id="yes">Added successfully</p>
+            <p class="is-hidden cus has-text-centered" id="yes"></p>
         </div>
 
         <p class="is-size-4 has-text-weight-semibold cus-dark">Club members</p>
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-            <thead>
+            <thead >
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tabel">
                 <tr>
                     <td>John Doe</td>
                     <td>john@example.com</td>
@@ -84,3 +83,36 @@
 
 </html>
 <script src='/assets/script/main.js'></script>
+
+<script>
+    let memebrNew = document.getElementById("memebrNew");
+    memebrNew.addEventListener('click', async()=>{
+        let email = document.getElementById("email").value;
+        let yes = document.getElementById("yes");
+        let table = document.getElementById("table");
+        const response = await fetch('http://localhost:5000/newMember', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email})
+        });
+        if (response.ok) {
+            const data = await response.json();
+            if(data.added == "added"){
+                yes.textContent = "The student is added"
+                table.innerHTML +=
+                `
+                <tr>
+                    <td>${data.name}</td>
+                    <td>${email}</td>
+                </tr>
+                `
+            }else if(data.added == "Not"){
+                yes.textContent = "The student is in a club"
+            }else{
+                yes.textContent = "student Not found"
+            }
+        }
+    })
+</script>

@@ -273,7 +273,7 @@ i {
     filter: blur(1px);
 }
 
-.navbar .contentBox{
+.navbar ~ .contentBox{
     padding-top: 60px;
 }
 .contentBox {

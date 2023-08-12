@@ -22,7 +22,8 @@
 
             <p class="menu-label">Club</p>
             <a href="/student/comps" class="lik"><i class="fa-solid fa-user-ninja"></i><span>Competitions</span></a>
-            <a href="/student/courses" class="lik active"><i class="fa-solid fa-lines-leaning"></i> <span>Learn</span></a>
+            <a href="/student/courses" class="lik active"><i class="fa-solid fa-lines-leaning"></i>
+                <span>Learn</span></a>
 
             <p class="menu-label">University Events</p>
             <a href="/student/event" class="lik special">
@@ -53,34 +54,19 @@
                 <img src="/assets/imgs/logo.png" alt="Logo">
             </a>
             <div class="navbar-item">
-                <p class="is-size-6 has-text-weight-semibold cus-darker"><a href="/student/" class="cus-light">Home</a> > Learn</p>
+                <p class="is-size-6 has-text-weight-semibold cus-darker"><a href="/student/" class="cus-light">Home</a>
+                    > Learn</p>
             </div>
         </div>
     </nav>
 
     <div class="contentBox">
         <p class="is-size-5 has-text-weight-semibold cus-dark">Channels | Subjects</p>
-        <p class="is-size-6 has-text-weight-semibold cus-light">Followed Channels</p>
-        <div class="columns is-multiline">
-            <div class="column is-4 joinedChan" channelId="624872">
-                <div class="cont">
-                    <img src="/assets/imgs/ai.jpg" alt="">
-                    <h2 class="cus-dark is-size-4 has-text-weight-semibold">AI Track</h2>
-                    <p class="dec cus-darker">learn AI in a community and talk to experts</p>
-                    <button view="624872" class="button viewIt">view <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <div class="column is-4 joinedChan" channelId="624872">
-                <div class="cont">
-                    <img src="/assets/imgs/web.jpeg" alt="">
-                    <h2 class="cus-dark is-size-4 has-text-weight-semibold">Learn Web Development</h2>
-                    <p class="dec cus-darker">Learn and parctice for Web development</p>
-                    <button view="624872" class="button viewIt">view <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
+        <!-- <p class="is-size-6 has-text-weight-semibold cus-light">Followed Channels</p> -->
+        <div class="columns is-multiline" id="channelCont">
+            
         </div>
-        <p class="is-size-6 has-text-weight-semibold cus-light">All Channels</p>
+        <!-- <p class="is-size-6 has-text-weight-semibold cus-light">All Channels</p>
         <div class="columns is-multiline">
             <div class="column is-3 joinedChan" channelId="624872">
                 <div class="cont">
@@ -90,10 +76,40 @@
                     <button view="624872" class="button viewIt">view <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </body>
 
 </html>
 <script src='/assets/script/main.js'></script>
+
+<script>
+
+    let channelCont = document.getElementById("channelCont");
+    document.addEventListener('DOMContentLoaded', async()=> {
+        const response = await fetch('http://localhost:5000/get_channels', {
+            method: 'GET',
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            data.channels.forEach((chan) => {
+                channelCont.innerHTML += 
+                `
+                <div class="column is-4 joinedChan">
+                    <div class="cont">
+                        <h2 class="cus-dark is-size-4 has-text-weight-semibold">${chan.title}</h2>
+                        <p class="dec cus-darker">${chan.desc}</p>
+                        <a href="${chan.link}" class="button viewIt">view <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                `
+            });
+        } else {
+            console.error('Request failed:', response.status, response.statusText);
+        }
+    })
+
+</script>
