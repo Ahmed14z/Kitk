@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html dir="ltr" lan="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tikt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/bulma.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/all.min.css'>
+</head>
+
+<body class = "hide-content">
+
+    <div class="sideMenuIcon">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="sideBar active">
+        <div class="top">
+            <p class="menu-label">Club</p>
+            <a href="/admin/" class="lik active"><i class="fa-solid fa-gears"></i><span>Settings</span></a>
+            <a href="/admin/members" class="lik"><i class="fa-solid fa-users"></i><span>Members</span></a>
+            <a href="/admin/comps" class="lik"><i class="fa-solid fa-user-ninja"></i><span>Competitions</span></a>
+            <a href="/admin/courses" class="lik"><i class="fa-solid fa-lines-leaning"></i> <span>Learn</span></a>
+
+            <p class="menu-label">University Events</p>
+            <a href="/admin/event" class="lik"><i class="fa-solid fa-calendar-days"></i> <span>event</span></a>
+        </div>
+        <div class="bottom">
+            <article class="media">
+                <figure class="media-left">
+                    <img src="https://via.placeholder.com/50" alt="Profile Image">
+                </figure>
+                <p>
+                    <span class="fname" id="userFirstName" >FirstName</span>
+                    <span class="uname">UniversityName</span>
+                </p>
+                <div class="media-right">
+                    <span class="icon" id="logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div class="contentBox">
+        <div class="columns is-multiline is-centered">
+            <div class="column is-5">
+                <h1 class="title cus">Club</h1>
+                <form id="loginForm">
+                    <div class="field">
+                        <label class="label cus">Club Name</label>
+                        <div class="control">
+                            <input class="input" name="club_name" type="text" placeholder="Enter Club Name">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label cus">Club Topic</label cus>
+                        <div class="control">
+                            <input class="input"  name="club_topic"  type="text" placeholder="Enter your Club Topic">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label cus">Club University</label>
+                        <div class="control">
+                            <input class="input" name="club_university"  type="text" placeholder="Enter The University Name">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label cus">Club ID</label>
+                        <div class="control">
+                            <input class="input" type="text" value="24242" disabled>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="buttons">
+                            <button id="saveButton" class="button is-primary cus is-fullwidth">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const clubNameInput = document.querySelector('input[name="club_name"]');
+            const clubTopicInput = document.querySelector('input[name="club_topic"]');
+            const clubUniversityInput = document.querySelector('input[name="club_university"]');
+            const editButton = document.createElement('button'); // Create Edit button dynamically
+            editButton.textContent = 'Edit';
+            editButton.classList.add('button', 'is-info', 'cus', 'is-fullwidth');
+            const saveButton = document.getElementById('saveButton');
+    
+            // Insert the Edit button before the Save button
+            saveButton.parentNode.insertBefore(editButton, saveButton);
+    
+            // Fetch club data based on admin ID
+            try {
+                const token = localStorage.getItem('token');
+                const userInfoResponse = await fetch('http://localhost:5000/userinfo', {
+                    method: 'GET',
+                    mode: 'cors',
+
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+    
+                if (userInfoResponse.ok) {
+                    const userInfo = await userInfoResponse.json();
+                    const adminId = "2424"; // Assuming the admin ID is stored in the token response
+    
+                    const clubResponse = await fetch(`http://localhost:5000/get_club/${adminId}`, {
+                        method: 'GET',
+                        mode: 'cors',
+
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+    
+                    if (clubResponse.ok) {
+                        const clubData = await clubResponse.json();
+                        clubNameInput.value = clubData.club_name;
+                        clubTopicInput.value = clubData.club_topic;
+                        clubUniversityInput.value = clubData.club_university;
+                        saveButton.style.display = 'none';
+                        editButton.style.display = 'block';
+                    } else {
+                        clubNameInput.removeAttribute('readonly');
+                        clubTopicInput.removeAttribute('readonly');
+                        clubUniversityInput.removeAttribute('readonly');
+                        editButton.style.display = 'none';
+                    }
+                } else {
+                    console.error('Failed to fetch user info:', userInfoResponse.status);
+                }
+            } catch (error) {
+                console.error('Request error:', error);
+            }
+    
+            editButton.addEventListener('click', function () {
+                const readOnly = clubNameInput.readOnly;
+                clubNameInput.readOnly = !readOnly;
+                clubTopicInput.readOnly = !readOnly;
+                clubUniversityInput.readOnly = !readOnly;
+    
+                if (!readOnly) {
+                    editButton.textContent = 'Edit';
+                    saveButton.style.display = 'none';
+                } else {
+                    editButton.textContent = 'Cancel';
+                    saveButton.style.display = 'block';
+                }
+            });
+        });
+    
+    </script>
+</body>
+
+</html>
+<script src='/assets/script/main.js'></script>

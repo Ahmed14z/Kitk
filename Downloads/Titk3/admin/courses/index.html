@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html dir="ltr" lan="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tikt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/bulma.min.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/assets/style/all.min.css'>
+</head>
+
+<body class = "hide-content">
+
+    <div class="sideMenuIcon">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="sideBar active">
+        <div class="top">
+            <p class="menu-label">Club</p>
+            <a href="/admin/" class="lik"><i class="fa-solid fa-gears"></i><span>Settings</span></a>
+            <a href="/admin/members" class="lik"><i class="fa-solid fa-users"></i><span>Members</span></a>
+            <a href="/admin/comps" class="lik"><i class="fa-solid fa-user-ninja"></i><span>Competitions</span></a>
+            <a href="/admin/courses" class="lik active"><i class="fa-solid fa-lines-leaning"></i> <span>Learn</span></a>
+
+            <p class="menu-label">University Events</p>
+            <a href="/admin/event" class="lik"><i class="fa-solid fa-calendar-days"></i> <span>event</span></a>
+        </div>
+        <div class="bottom">
+            <article class="media">
+                <figure class="media-left">
+                    <img src="https://via.placeholder.com/50" alt="Profile Image">
+                </figure>
+                <p>
+                    <span class="fname" id="userFirstName">FirstName</span>
+                    <span class="uname">UniversityName</span>
+                </p>
+                <div class="media-right">
+                    <span class="icon" id="logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div class="contentBox">
+        <p class="is-size-4 has-text-weight-semibold cus-dark">Learning Tools</p>
+        <div class="columns is-multiline">
+            <a class="column has-text-centered is-3" href="/admin/courses/gemnerate/roadmap/">
+                <div class="tool">
+                    <span class="icon cus"><i class="fa-regular fa-map"></i></span>
+                    <p class="is-size-5">Generate Roadmaps</p>
+                </div>
+            </a>
+
+            <a class="column has-text-centered is-3" href="/admin/courses/gemnerate/mind/">
+                <div class="tool">
+                    <span class="icon cus"><i class="fa-solid fa-brain"></i></span>
+                    <p class="is-size-5">Generate Mind Maps</p>
+                </div>
+            </a>
+
+            <a class="column has-text-centered is-3" href="/admin/courses/gemnerate/tutorial/">
+                <div class="tool">
+                    <span class="icon cus"><i class="fa-solid fa-chalkboard"></i></span>
+                    <p class="is-size-5">Generate Tutorial</p>
+                </div>
+            </a>
+
+            <a class="column has-text-centered is-3" href="/admin/courses/gemnerate/quiz/">
+                <div class="tool">
+                    <span class="icon cus"><i class="fa-solid fa-vial-circle-check"></i></span>
+                    <p class="is-size-5">Generate Quiz</p>
+                </div>
+            </a>
+        </div>
+        <hr>
+        <p class="is-size-4 has-text-weight-semibold cus-dark">Channels</p>
+        <br>
+
+        <a href="/admin/courses/newChannel/" class="button cus has-text-white block"><i class="fa-solid fa-plus"></i> Create new Channel</a>
+        <div class="columns is-multiline is-multiline">
+            <div class="column is-4 joinedChan" channelId="624872">
+                <div class="cont">
+                    <img src="/assets/imgs/ai.jpg" alt="">
+                    <h2 class="cus-dark is-size-4 has-text-weight-semibold">AI Track</h2>
+                    <p class="dec cus-darker">learn AI in a community and talk to experts</p>
+                    <button view="624872" class="button viewIt">Control <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="column is-4 joinedChan" channelId="624872">
+                <div class="cont">
+                    <img src="/assets/imgs/web.jpeg" alt="">
+                    <h2 class="cus-dark is-size-4 has-text-weight-semibold">Learn Web Development</h2>
+                    <p class="dec cus-darker">Learn and parctice for Web development</p>
+                    <button view="624872" class="button viewIt">Control <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script src='/assets/script/main.js'></script>
