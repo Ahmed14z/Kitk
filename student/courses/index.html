@@ -64,7 +64,7 @@
         <p class="is-size-5 has-text-weight-semibold cus-dark">Channels | Subjects</p>
         <!-- <p class="is-size-6 has-text-weight-semibold cus-light">Followed Channels</p> -->
         <div class="columns is-multiline" id="channelCont">
-            
+
         </div>
         <!-- <p class="is-size-6 has-text-weight-semibold cus-light">All Channels</p>
         <div class="columns is-multiline">
@@ -87,7 +87,7 @@
 <script>
 
     let channelCont = document.getElementById("channelCont");
-    document.addEventListener('DOMContentLoaded', async()=> {
+    document.addEventListener('DOMContentLoaded', async () => {
         const response = await fetch('http://localhost:8001/get_channels', {
             method: 'GET',
         });
@@ -96,16 +96,47 @@
             const data = await response.json();
 
             data.channels.forEach((chan) => {
-                channelCont.innerHTML += 
-                `
-                <div class="column is-4 joinedChan">
-                    <div class="cont">
-                        <h2 class="cus-dark is-size-4 has-text-weight-semibold">${chan.title}</h2>
-                        <p class="dec cus-darker">${chan.description}</p>
-                        <a href="${chan.link}" class="button viewIt">view <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                `
+
+                const columnElement = document.createElement("div");
+                columnElement.classList.add("column", "is-4", "joinedChan");
+
+                // Create the inner container
+                const containerElement = document.createElement("div");
+                containerElement.classList.add("cont");
+
+                // Create the <h2> element
+                const headingElement = document.createElement("h2");
+                headingElement.classList.add("cus-dark", "is-size-4", "has-text-weight-semibold");
+                headingElement.textContent = chan.title; // Change this text
+
+                // Create the <p> element
+                const paragraphElement = document.createElement("p");
+                paragraphElement.textContent = chan.description
+                paragraphElement.classList.add("dec", "cus-darker");
+
+                // Create the <a> element
+                const linkElement = document.createElement("button");
+                linkElement.classList.add("button", "viewIt");
+                linkElement.textContent = "view ";
+                linkElement.addEventListener((ele)=>{
+                    localStorage.setItem('last', chan.id);
+                    window.open('/student/channel.html')
+                })
+
+                // Create the <i> element
+                const iconElement = document.createElement("i");
+                iconElement.classList.add("fa-solid", "fa-arrow-right");
+                linkElement.appendChild(iconElement);
+
+                // Append elements to the inner container
+                containerElement.appendChild(headingElement);
+                containerElement.appendChild(paragraphElement);
+                containerElement.appendChild(linkElement);
+
+                // Append the inner container to the column
+                columnElement.appendChild(containerElement);
+
+                channelCont.appendChild(columnElement);
             });
         } else {
             console.error('Request failed:', response.status, response.statusText);
