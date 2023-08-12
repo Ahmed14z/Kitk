@@ -1,0 +1,88 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background-color: lightblue;
+  background-image: url(background.jpg);
+  Background-size: 100%;
+  color: darkred;
+  padding: 30px;
+}
+
+.btn{
+background-color: aqua;
+}
+img{
+  display: block;
+  max-width: 100%;
+}
+
+.Title{
+  color: darkblue;
+  padding-top: 50px;
+  text-align: left;
+}
+
+.custs {
+  font-size: 24px;
+  color: #66ccff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  font-weight: bold;
+  background-color: #333333;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.custe {
+  margin-left: auto;
+}
+  
+.cust2{
+  text-align: center;
+  padding-right:200px;
+  color: firebrick;
+  
+}
+
+.Body{
+  text-align: left;
+  color: black;
+}
+.fixl{
+  padding-top: 20%;
+}
+.padz{
+  padding: 50px;
+}
+
+.templateContainer{
+  margin: 5% 0;
+}
+.templateContainer > .searchInput_Container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.templateContainer > .searchInput_Container input{
+  width: 50%;
+  padding: 10px;
+  outline: none;
+}
+.templateContainer .template_Container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.templateContainer .template_Container .template{
+ 
+  margin: 30px;
+  padding: 0px 20px;
+}
+.templateContainer .template_Container .template img{
+  height: 250px;
+}

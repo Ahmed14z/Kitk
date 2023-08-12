@@ -1,0 +1,63 @@
+.add-products-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #007bff, #0099ff); /* Replace with your desired gradient colors */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  .add-products-page h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .add-products-page form {
+    display: grid;
+    grid-gap: 20px;
+    align-items: center;
+  }
+  
+  .add-products-page label {
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+  }
+  
+  .add-products-page input,
+  .add-products-page textarea {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .add-products-page input[type="file"] {
+    background-color: transparent;
+    border: none;
+  }
+  
+  .add-products-page button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-products-page button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  

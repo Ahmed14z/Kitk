@@ -1,0 +1,43 @@
+.container {
+  background-color: #f8f8f8;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.purchase-container {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+h2, h3, h4, p {
+  margin: 0;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 10px 0;
+}

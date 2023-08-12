@@ -1,0 +1,61 @@
+kind: Environment
+name: 'ECommerce with Docker Composee'
+type: primary
+environmentVariables:
+  REACT_APP_BACKEND_HOST: '{{components.flask-app.ingress.hosts[0].hostname}}'
+components:
+  - kind: Application
+    name: flask-app
+    gitRepo: 'https://github.com/Ahmed14z/Ecom_BunnyShell.git'
+    gitBranch: main
+    gitApplicationPath: /
+    dockerCompose:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      environment:
+        DB_URL: 'postgresql://postgres:postgres@flask-db:5432/postgres'
+      ports:
+        - '8000:8000'
+      volumes:
+        - /app/uploads  # Mount point for uploads directory
+    mountPoints:
+      - source: uploads
+        target: /app/uploads
+    hosts:
+      - hostname: 'flask-app-{{ env.base_domain }}'
+        path: /
+        servicePort: 8000
+  - kind: Database
+    name: flask-db
+    dockerCompose:
+      environment:
+        POSTGRES_DB: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_USER: postgres
+      image: 'postgres:12'
+      ports:
+        - '5432:5432'
+    volumes:
+      - name: pgdata
+        mount: /var/lib/postgresql/data
+        subPath: ''
+  - kind: Application
+    name: frontend
+    gitRepo: 'https://github.com/Ahmed14z/Ecom_BunnyShell.git'
+    gitBranch: main
+    gitApplicationPath: my-app
+    dockerCompose:
+      build:
+        context: ./my-app
+        dockerfile: Dockerfile
+      ports:
+        - '3000:3000'
+    hosts:
+      - hostname: 'frontend-{{ env.base_domain }}'
+        path: /
+        servicePort: 3000
+volumes:
+  - name: pgdata
+    size: 1Gi
+    type: disk

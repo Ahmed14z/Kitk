@@ -1,0 +1,10 @@
+flask
+psycopg2-binary
+Flask-SQLAlchemy
+flask-cors
+flask_marshmallow
+flask_bcrypt
+uuid
+sqlalchemy_json
+sqlalchemy_utils
+sqlalchemy.orm

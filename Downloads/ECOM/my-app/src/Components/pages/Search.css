@@ -1,0 +1,16 @@
+.input-group {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .input-group-prepend .btn {
+    border-radius: 0;
+    border: none;
+    background-color: #f8f9fa;
+    color: #000;
+  }
+  
+  .form-control {
+    border-radius: 0;
+  }
+  

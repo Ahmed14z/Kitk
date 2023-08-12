@@ -1,0 +1,37 @@
+.container {
+  height: 120vh;
+  background: linear-gradient(to bottom, #a8daf0, #f44242); /* Adjust the colors as desired */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+  
+  
+  .title-container {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 0;
+    color: #333;
+  }
+  
+  .form-outline {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    border-color: #555;
+  }
+  
+  .form-label {
+    color: #555;
+  }
+  
+  .link-danger {
+    color: red;
+  }
+  
