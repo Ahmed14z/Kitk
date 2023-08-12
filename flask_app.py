@@ -8,7 +8,7 @@ from functools import wraps
 import requests
 
 
-OPENAI_API_KEY = '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'
+OPENAI_API_KEY = 'Enter Open Ai Api'
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*", "headers": "Authorization"}})
