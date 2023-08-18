@@ -1,6 +1,7 @@
 # AI-Driven Student Skill Development Platform
 
 Welcome to the GitHub repository for the back end of our AI-Driven Student Skill Development Platform! In this README, I'll walk you through how I handled the back end of this project, which aims to provide a supportive and engaging environment for students interested in advancing their practical skills, particularly in the field of artificial intelligence.
+The Demo Link: http://ahmed14z.pythonanywhere.com/
 
 ## Project Overview
 
