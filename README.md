@@ -1,7 +1,7 @@
 # AI-Driven Student Skill Development Platform
 
 Welcome to the GitHub repository for the back end of our AI-Driven Student Skill Development Platform! In this README, I'll walk you through how I handled the back end of this project, which aims to provide a supportive and engaging environment for students interested in advancing their practical skills, particularly in the field of artificial intelligence.
-# Demo Link : [http://ahmed14z.pythonanywhere.com]
+# Demo Link : http://ahmed14z.pythonanywhere.com
 ## Project Overview
 
 This project was developed as part of the lablab.me hackathon, a fast-paced 48-hour event that challenges participants to create innovative solutions for education. As such, this project is designed as a simple Minimum Viable Product (MVP) aimed at showcasing the core functionalities of the envisioned platform. The platform is designed to facilitate student engagement in clubs focused on artificial intelligence and related technologies, backed by universities. By registering on the platform, students gain access to a wealth of resources and opportunities. The core features and benefits of the platform include:
